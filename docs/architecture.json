@@ -1,0 +1,92 @@
+{
+  "project": "travel-companion",
+  "generatedAt": "2025-10-24T21:17:19.238Z",
+  "components": [
+    {
+      "path": "app.component.ts",
+      "file": "app.component.ts",
+      "selector": "app-root"
+    },
+    {
+      "path": "features/map/map.component.ts",
+      "file": "map.component.ts",
+      "selector": "app-map"
+    },
+    {
+      "path": "features/news/news.component.ts",
+      "file": "news.component.ts",
+      "selector": "app-news"
+    },
+    {
+      "path": "features/weather/weather.component.ts",
+      "file": "weather.component.ts",
+      "selector": "app-weather"
+    },
+    {
+      "path": "pages/home/home.component.ts",
+      "file": "home.component.ts",
+      "selector": "app-home"
+    }
+  ],
+  "services": [
+    {
+      "path": "services/map.service.ts",
+      "file": "map.service.ts",
+      "endpoints": [
+        {
+          "method": "GET",
+          "url": "https://nominatim.openstreetmap.org/search"
+        }
+      ]
+    },
+    {
+      "path": "services/news.service.ts",
+      "file": "news.service.ts",
+      "endpoints": [
+        {
+          "method": "GET",
+          "url": "https://newsapi.org/v2/everything"
+        }
+      ]
+    },
+    {
+      "path": "services/weather.service.ts",
+      "file": "weather.service.ts",
+      "endpoints": [
+        {
+          "method": "GET",
+          "url": "https://api.open-meteo.com/v1/forecast"
+        }
+      ]
+    }
+  ],
+  "apiDependencies": [
+    "OpenWeather (weather)",
+    "NewsAPI (news)",
+    "Mapbox or OpenStreetMap (maps)"
+  ],
+  "dataFlow": [
+    {
+      "component": "map.component.ts",
+      "uses": [
+        "map.service (service)"
+      ],
+      "to": "External API via service"
+    },
+    {
+      "component": "news.component.ts",
+      "uses": [
+        "news.service (service)"
+      ],
+      "to": "External API via service"
+    },
+    {
+      "component": "weather.component.ts",
+      "uses": [
+        "map.service (service)",
+        "weather.service (service)"
+      ],
+      "to": "External API via service"
+    }
+  ]
+}

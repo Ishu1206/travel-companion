@@ -1,0 +1,40 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Test/coverage output
+coverage/
+
+# Environment files (uncomment if you use them)
+# .env
+# .env.*
+
+# Compiled output
+*.tsbuildinfo
+
+# Misc
+*.log
+
+# Angular specific
+.angular/cache/
+
+# Optional: ignore generated docs if you want to force regeneration
+# docs/architecture.json
+
