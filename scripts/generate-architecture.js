@@ -125,3 +125,53 @@ if (!fs.existsSync(docsDir)) fs.mkdirSync(docsDir);
 const outPath = path.join(docsDir, 'architecture.json');
 fs.writeFileSync(outPath, JSON.stringify(architecture, null, 2), 'utf8');
 console.log('Generated', outPath);
+
+// --- Generate flat table for CSV/Markdown ---
+const flatRows = [];
+// Components
+architecture.components.forEach(comp => {
+  // Find dependencies for this component
+  const dataFlow = architecture.dataFlow.find(df => df.component === comp.file);
+  flatRows.push({
+    Type: 'Component',
+    Name: comp.file.replace('.component.ts', ''),
+    File: comp.path,
+    Selector: comp.selector || '',
+    DependsOn: dataFlow ? dataFlow.uses.join(', ') : '',
+    Endpoints: ''
+  });
+});
+// Services
+architecture.services.forEach(svc => {
+  flatRows.push({
+    Type: 'Service',
+    Name: svc.file.replace('.service.ts', ''),
+    File: svc.path,
+    Selector: '',
+    DependsOn: '',
+    Endpoints: (svc.endpoints && svc.endpoints.length)
+      ? svc.endpoints.map(e => `${e.method} ${e.url}`).join('; ') : ''
+  });
+});
+// --- Write CSV ---
+function escapeCsv(val) {
+  if (val == null) return '';
+  const s = String(val);
+  return s.includes(',') || s.includes('"') || s.includes('\n')
+    ? '"' + s.replace(/"/g, '""') + '"'
+    : s;
+}
+const csvHeaders = ['Type', 'Name', 'File', 'Selector', 'DependsOn', 'Endpoints'];
+const csvRows = [csvHeaders.join(',')].concat(
+  flatRows.map(row => csvHeaders.map(h => escapeCsv(row[h])).join(','))
+);
+fs.writeFileSync(path.join(docsDir, 'architecture.csv'), csvRows.join('\n'), 'utf8');
+// --- Write Markdown Table ---
+const mdHeaders = '| ' + csvHeaders.join(' | ') + ' |';
+const mdSep = '| ' + csvHeaders.map(() => '---').join(' | ') + ' |';
+const mdRows = flatRows.map(row =>
+  '| ' + csvHeaders.map(h => (row[h] || '').replace(/\n/g, ' ').replace(/\|/g, '\|')).join(' | ') + ' |'
+);
+const mdTable = [mdHeaders, mdSep, ...mdRows].join('\n');
+fs.writeFileSync(path.join(docsDir, 'architecture.md'), mdTable, 'utf8');
+
