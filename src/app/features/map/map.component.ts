@@ -7,9 +7,8 @@ import { MapService } from '../../services/map.service';
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Map</h5>
-        <div *ngIf="loading">Loading map...</div>
+        <div #mapContainer style="width:100%;height:200px;"></div>
         <div *ngIf="error" class="text-danger">{{error}}</div>
-        <div #mapContainer style="height:200px; width:100%"></div>
       </div>
     </div>
   `
@@ -40,4 +39,3 @@ export class MapComponent implements OnChanges, AfterViewInit {
     });
   }
 }
-

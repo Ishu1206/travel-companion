@@ -39,4 +39,3 @@ export class NewsComponent implements OnChanges {
     });
   }
 }
-

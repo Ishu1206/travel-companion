@@ -22,6 +22,7 @@ import { Component } from '@angular/core';
           <div class="row">
             <div class="col-md-4">
               <app-weather [city]="cityQuery"></app-weather>
+              <app-things-to-do [city]="cityQuery"></app-things-to-do>
             </div>
             <div class="col-md-4">
               <app-news [city]="cityQuery"></app-news>
@@ -62,4 +63,3 @@ export class HomeComponent {
 
   onSearch(e: Event) { e.preventDefault(); this.search(); }
 }
-

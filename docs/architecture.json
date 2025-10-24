@@ -1,6 +1,6 @@
 {
   "project": "travel-companion",
-  "generatedAt": "2025-10-24T21:38:33.201Z",
+  "generatedAt": "2025-10-24T22:06:29.071Z",
   "components": [
     {
       "path": "app.component.ts",
@@ -16,6 +16,11 @@
       "path": "features/news/news.component.ts",
       "file": "news.component.ts",
       "selector": "app-news"
+    },
+    {
+      "path": "features/things-to-do/things-to-do.component.ts",
+      "file": "things-to-do.component.ts",
+      "selector": "app-things-to-do"
     },
     {
       "path": "features/weather/weather.component.ts",
@@ -50,12 +55,32 @@
       ]
     },
     {
+      "path": "services/things-to-do.service.ts",
+      "file": "things-to-do.service.ts",
+      "endpoints": [
+        {
+          "method": "GET",
+          "url": "https://api.opentripmap.com/0.1/en/places/radius"
+        }
+      ]
+    },
+    {
       "path": "services/weather.service.ts",
       "file": "weather.service.ts",
       "endpoints": [
         {
           "method": "GET",
           "url": "https://api.open-meteo.com/v1/forecast"
+        }
+      ]
+    },
+    {
+      "path": "services/wikipedia-things-to-do.service.ts",
+      "file": "wikipedia-things-to-do.service.ts",
+      "endpoints": [
+        {
+          "method": "GET",
+          "url": "this.summaryBase + encodeURIComponent(title)).pipe(\n      map(res => res && res.extract ? res : null)"
         }
       ]
     }
@@ -77,6 +102,14 @@
       "component": "news.component.ts",
       "uses": [
         "news.service (service)"
+      ],
+      "to": "External API via service"
+    },
+    {
+      "component": "things-to-do.component.ts",
+      "uses": [
+        "things-to-do.service (service)",
+        "wikipedia-things-to-do.service (service)"
       ],
       "to": "External API via service"
     },

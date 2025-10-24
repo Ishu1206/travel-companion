@@ -8,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { WeatherComponent } from './features/weather/weather.component';
 import { NewsComponent } from './features/news/news.component';
 import { MapComponent } from './features/map/map.component';
+import { ThingsToDoComponent } from './features/things-to-do/things-to-do.component';
 
 @NgModule({
   declarations: [
@@ -15,11 +16,11 @@ import { MapComponent } from './features/map/map.component';
     HomeComponent,
     WeatherComponent,
     NewsComponent,
-    MapComponent
+    MapComponent,
+    ThingsToDoComponent
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
