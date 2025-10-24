@@ -11,3 +11,4 @@ Notes
 - Set API keys for OpenWeather and NewsAPI via environment or runtime configuration before making real requests.
 - The project includes a script `scripts/generate-architecture.js` that emits `docs/architecture.json` describing components and services.
 
+Confluence reference - https://ishantgarg12.atlassian.net/wiki/spaces/~7120203c4e763197934257b5046250fba343fb/pages/65909/Poc+github+--+confluence
